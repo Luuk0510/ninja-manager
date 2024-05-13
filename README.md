@@ -25,3 +25,10 @@ De applicatie biedt gedetailleerde weergave van statistieken gebaseerd op de aan
 - Database: Dataopslag met MSSQL en Entity Framework, met voorkeur voor model-first benadering.
 - Relatie: Veel-op-veel relatie tussen Ninja en Gear.
 - Architectuur: Gebruik van het MVC patroon en scheiding van presentatielogica en businesslogica via Class Libraries.
+
+## Screenshots
+![afbeelding](https://github.com/Luuk0510/ninja-manager/assets/54103279/e1774cce-35e7-455d-9919-e09c61478ccf)
+![afbeelding](https://github.com/Luuk0510/ninja-manager/assets/54103279/33227b1c-c550-4626-abb4-ff8690f7d3a8)
+![afbeelding](https://github.com/Luuk0510/ninja-manager/assets/54103279/8bd00b8a-f592-42fd-be20-11c3e4857b96)
+![afbeelding](https://github.com/Luuk0510/ninja-manager/assets/54103279/fef247e1-2402-4db1-9abe-1c365ab91f9c)
+![afbeelding](https://github.com/Luuk0510/ninja-manager/assets/54103279/46324710-3ee1-44d1-b010-66da642b1b38)
