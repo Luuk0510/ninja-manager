@@ -1,0 +1,80 @@
+﻿@model ninja_manager.Models.NinjaEquipmentViewModel
+
+@{
+    ViewData["Title"] = "DetailsNinjaView";
+
+    int count = 0, strength = 0, agility = 0, intelligence = 0;
+    double gearValue = 0;
+
+    foreach (var stat in Model.EquipmentList)
+    {
+        strength += stat.Strength;
+        agility += stat.Agility;
+        intelligence += stat.Intelligence;
+        gearValue += stat.Gold;
+    }
+
+    int totalStats = strength + agility + intelligence;
+}
+
+<div class="d-flex justify-content-between align-items-center">
+    <a class="btn btn-outline-secondary btn-lg" asp-action="Index">Back to Ninja overview</a>
+    <h1 class="mx-auto text-center">Ninja: @Model.NinjaName</h1>
+    <div class="btn-group">
+    <a class="btn btn-outline-primary btn-lg" asp-controller="Shop" asp-action="Index" asp-route-ninjaId="@Model.NinjaId">Shop</a>
+    <a class="btn btn-outline-primary btn-lg" asp-controller="Shop" asp-action="MyEquipment" asp-route-ninjaId="@Model.NinjaId">My Equipment</a>
+    </div>
+</div>
+
+<hr />
+
+<p>Gold in wallet: @Model.Gold</p>
+
+<p class="m-0 p-0">Total Strength: @strength</p>
+<p class="m-0 p-0">Total Agility: @agility</p>
+<p>Total Intelligence: @intelligence</p>
+
+<p class="m-0 p-0">Gear Value: @gearValue</p>
+
+<div class="container mt-5">
+    <div class="row">
+
+        <div class="col-2"></div>
+
+        <div class="col-3">
+            @foreach (var equipment in Model.EquipmentList.Take(3))
+            {
+                @if (count >= 3) break;
+                <div class="card mb-5">
+                    <div class="card-body">
+                        <p class="m-0 p-0">@equipment.CategoryName : @equipment.Name</p>
+                        <p class="m-0 p-0">Strength : @equipment.Strength</p>
+                        <p class="m-0 p-0">Agility : @equipment.Agility</p>
+                        <p class="m-0 p-0">Intelligence : @equipment.Intelligence</p>
+                    </div>
+                </div>
+                count++;
+            }
+        </div>
+
+        <div class="col-3">
+            <img src="@Url.Content(Model.imageUrl)" alt="My Image" height="490">
+        </div>
+
+        <div class="col-3">
+            @foreach (var equipment in Model.EquipmentList.Skip(3).Take(3))
+            {
+                @if (count >= 6) break;
+                <div class="card mb-5">
+                    <div class="card-body">
+                        <p class="m-0 p-0">@equipment.CategoryName : @equipment.Name</p>
+                        <p class="m-0 p-0">Strength : @equipment.Strength</p>
+                        <p class="m-0 p-0">Agility : @equipment.Agility</p>
+                        <p class="m-0 p-0">Intelligence : @equipment.Intelligence</p>
+                    </div>
+                </div>
+                count++;
+            }
+        </div>
+    </div>
+</div>

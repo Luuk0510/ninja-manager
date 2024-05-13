@@ -1,0 +1,56 @@
+﻿@model ninja_manager.Models.SellItemViewModel
+
+@{
+    ViewData["Title"] = "DeleteNinjaView";
+}
+<div class="container">
+    <div class="text-center">
+        <h1>Sell @Html.DisplayFor(model => model.Equipment.Name)</h1>
+
+        <h3>Are you sure you want to Sell this item?</h3>
+    </div>
+    <hr />
+    <div class=" w-50 mx-auto">
+        <dl class="row">
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Equipment.Name)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Equipment.Name)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Equipment.Strength)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Equipment.Strength)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Equipment.Intelligence)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Equipment.Intelligence)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Equipment.Agility)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Equipment.Agility)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Equipment.Gold)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Equipment.Gold)
+            </dd>
+        </dl>
+
+        <form asp-action="ConfirmSellEquipment" method="post">
+            <input type="hidden" name="ninjaId" value="@Model.Ninja.Id" />
+            <input type="hidden" name="equipmentId" value="@Model.Equipment.Id" />
+            <input type="submit" value="Sell Item" class="btn btn-warning" />
+        </form>
+        <div class="pt-4">
+            <a class="btn btn-outline-secondary btn-sm" asp-route-ninjaId="@Model.Ninja.Id" asp-action="MyEquipment">Back to my Equipment</a>
+        </div>
+    </div>
+</div>

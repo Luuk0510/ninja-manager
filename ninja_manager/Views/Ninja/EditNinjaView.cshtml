@@ -1,0 +1,41 @@
+﻿@model ninja_manager.Models.Ninja
+
+@{
+    ViewData["Title"] = "EditNinjaView";
+}
+<div class="container">
+    <h1 class="text-center">Edit @Model.Name</h1>
+    <hr />
+    <div class="row justify-content-center">
+        <div class="col-md-4">
+            <form asp-action="EditNinjaView" method="post">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="Id" />
+                <div class="form-group">
+                    <label asp-for="Name" class="control-label"></label>
+                    <input asp-for="Name" class="form-control" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Gold" class="control-label"></label>
+                    <input asp-for="Gold" class="form-control w-50" />
+                    <span asp-validation-for="Gold" class="text-danger"></span>
+                </div>
+                <div class="form-group pt-3">
+                    <input type="submit" value="Save" class="btn btn-primary" />
+                </div>
+            </form>
+            <div class="pt-4">
+                <a class="btn btn-outline-secondary btn-sm" asp-action="Index">Back to List</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

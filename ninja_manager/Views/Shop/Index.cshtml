@@ -1,0 +1,93 @@
+﻿@model ninja_manager.Models.ShopModelView
+
+@{
+    ViewData["Title"] = "Shop";
+    string boughtItemMessage = TempData["BoughtItemMessage"] as string;
+    string duplicateCategoryMessage = TempData["DuplicateCategoryMessage"] as string;
+    string notEnoughGoldMessage = TempData["NotEnoughGoldMessage"] as string;
+}
+
+<div class="d-flex justify-content-between align-items-center">
+    <a class="btn btn-outline-secondary btn-lg" asp-controller="Ninja" asp-action="DetailsNinjaView" asp-route-ninjaId="@Model.NinjaId">Back to Ninja</a>
+    <h1 class="mx-auto text-center">Welcome to the Shop</h1>
+    <a class="btn btn-outline-primary btn-lg" asp-controller="Shop" asp-action="MyEquipment" asp-route-ninjaId="@Model.NinjaId">My Equipment</a>
+</div>
+
+<hr />
+@if (!string.IsNullOrEmpty(boughtItemMessage))
+{
+    <div class="alert alert-success">
+        @Html.Raw(boughtItemMessage)
+    </div>
+}
+else if (!string.IsNullOrEmpty(duplicateCategoryMessage))
+{
+    <div class="alert alert-warning">
+        @Html.Raw(duplicateCategoryMessage)
+    </div>
+}
+else if (!string.IsNullOrEmpty(notEnoughGoldMessage))
+{
+    <div class="alert alert-danger">
+        @Html.Raw(notEnoughGoldMessage)
+    </div>
+}
+<div class="col-md-8 offset-md-2">
+    <form method="post" asp-action="FilterEquipment" asp-controller="Shop">
+        <input type="hidden" name="ninjaId" value="@Model.NinjaId" />
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group mb-0">
+                    <label for="categorySelect">Choose a Category:</label>
+                    <select class="form-control" id="categorySelect" name="selectedCategory">
+                        @foreach (var category in Model.Categories)
+                        {
+                            if (category.Name == Model.StandardCategorie)
+                            {
+                                <option value="@category.Name" selected>@category.Name</option>
+                            }
+                            else
+                            {
+                                <option value="@category.Name">@category.Name</option>
+                            }
+                        }
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-6 align-self-end">
+                <button type="submit" class="btn btn-primary">Filter</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div class="col-md-8 offset-md-2">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Strength</th>
+                <th>Intelligence</th>
+                <th>Agility</th>
+                <th>Gold</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var equipment in Model.Equipments)
+            {
+                <tr>
+                    <td class="align-middle">@equipment.Name</td>
+                    <td class="align-middle">@equipment.Strength</td>
+                    <td class="align-middle">@equipment.Intelligence</td>
+                    <td class="align-middle">@equipment.Agility</td>
+                    <td class="align-middle">@equipment.Gold</td>
+                    <td>
+                        <a class="btn btn-success" asp-controller="Shop" asp-action="BuyItem" asp-route-ninjaId="@Model.NinjaId" asp-route-equipmentId="@equipment.Id">Buy</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+

@@ -1,0 +1,55 @@
+﻿@model ninja_manager.Models.NinjaEquipmentViewModel
+
+@{
+    ViewData["Title"] = "My Equipment";
+
+    string soldEquipment = TempData["SoldEquipment"] as string;
+}
+<div class="d-flex justify-content-between align-items-center">
+    <div class="btn-group">
+        <a class="btn btn-outline-secondary btn-lg" asp-controller="Ninja" asp-action="DetailsNinjaView" asp-route-ninjaId="@Model.NinjaId">Back to Ninja</a>
+        <a class="btn btn-outline-secondary btn-lg" asp-controller="Shop" asp-action="Index" asp-route-ninjaId="@Model.NinjaId">Back to Shop</a>
+    </div>
+    <h1 class="mx-auto text-center">My equipment</h1>
+    <div style="width: calc(35% - 10rem);"></div>
+</div>
+
+<hr />
+
+<div class="col-md-8 offset-md-2">
+    @if (!string.IsNullOrEmpty(soldEquipment))
+    {
+        <div class="alert alert-success">
+            @Html.Raw(soldEquipment)
+        </div>
+    }
+    <p>Total gold: @Model.Gold</p>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Categorie</th>
+                <th>Name</th>
+                <th>Strength</th>
+                <th>Intelligence</th>
+                <th>Agility</th>
+                <th>Gold</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var equipment in Model.EquipmentList)
+            {
+                <tr>
+                    <td class="align-middle"><strong>@equipment.CategoryName</strong></td>
+                    <td class="align-middle">@equipment.Name</td>
+                    <td class="align-middle">@equipment.Strength</td>
+                    <td class="align-middle">@equipment.Intelligence</td>
+                    <td class="align-middle">@equipment.Agility</td>
+                    <td class="align-middle">@equipment.Gold</td>
+                    <td><a class="btn btn-warning" asp-controller="Shop" asp-route-ninjaId="@Model.NinjaId" asp-route-equipmentId="@equipment.Id" asp-action="SellEquipmentView">Sell</a></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
